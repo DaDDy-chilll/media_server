@@ -6,7 +6,7 @@ let routes = {
     "GET":{
         "/":(req,res,path)=>{
             res.writeHead(200,{'Content-Type':'text/html'});
-            res.end(`<h1>Get method => / route</h1>`);
+            res.end(`<h1>Get method => / route  with ${path.query.name} and ${path.query.age}</h1>`);
             console.log('method GET and path /');
         },
         "/home":(req,res,path)=>{
@@ -18,18 +18,18 @@ let routes = {
     "POST":{
         "/":(req,res,path)=>{
             res.writeHead(200,{'Content-Type':'text/html'});
-            res.end(`<h1>Post method => / route</h1>`);
-            console.log('method Post and path /')
+            res.end(`<h1>Post method => / route  with ${path.query.name} and ${path.query.age}</h1>`);
+            console.log('method Post and path /');
         },
         "/about":(req,res,path)=>{
             res.writeHead(200,{'Content-Type':'text/html'});
-            res.end(`<h1>Post method => /about route</h1>`);
-            console.log('method post and path /about')
+            res.end(`<h1>Post method => /about route  with ${path.query.name} and ${path.query.age}</h1>`);
+            console.log('method post and path /about');
         }
     },
     "NA":(req,res,path)=>{
         res.writeHead(404);
-        res.end(`<h1>No page for that route!</h1>`)
+        res.end(`<h1>No page for that route!  with ${path.query.name} and ${path.query.age}</h1>`);
     }
 }
 let start = (req,res)=>{
@@ -40,14 +40,14 @@ let start = (req,res)=>{
 //    console.log('Name ', name,'age ',age);
    let resolveRoute = routes[reqMethod][path.pathname];
    if(resolveRoute != null && resolveRoute != undefined){
-       resolveRoute(req,res);
+       resolveRoute(req,res,path);
    }else{
-        routes["NA"](req,res);
+        routes["NA"](req,res,path);
    }
 //    res.end();
    
 }
 let server = http.createServer(start);
-server.listen(process.env.PORT,function(){
-    console.log(`Server is running on port ${process.env.PORT}`);
+server.listen(3000,function(){
+    console.log(`Server is running on port 3000`);
 });
