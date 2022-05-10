@@ -56,7 +56,7 @@ let routes = {
     },
     "NA":(req,res,path)=>{
         res.writeHead(404);
-        res.end(`<h1>No page for that route!  with ${path.query.name} and ${path.query.age}</h1>`);
+        res.end(`<h1>No page for that route!</h1>`);
     }
 }
 let start = (req,res)=>{
